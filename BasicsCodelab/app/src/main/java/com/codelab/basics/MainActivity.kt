@@ -117,10 +117,11 @@ private fun Greetings(
 @Composable
 private fun Greeting(name: String, modifier: Modifier = Modifier) {
     Card(
+        modifier = modifier
+            .padding(vertical = 4.dp, horizontal = 8.dp),
         colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.primary
-        ),
-        modifier = modifier.padding(vertical = 4.dp, horizontal = 8.dp)
+        )
     ) {
         CardContent(name)
     }
@@ -135,7 +136,7 @@ private fun CardContent(name: String) {
             .padding(12.dp)
             .animateContentSize(
                 animationSpec = spring(
-                    dampingRatio = Spring.DampingRatioMediumBouncy,
+                    dampingRatio = Spring.DampingRatioNoBouncy,
                     stiffness = Spring.StiffnessLow
                 )
             )
@@ -183,10 +184,15 @@ fun OnboardingPreview() {
 @Preview(
     showBackground = true,
     widthDp = 320,
+    heightDp = 640,
     uiMode = UI_MODE_NIGHT_YES,
     name = "GreetingPreviewDark"
 )
-@Preview(showBackground = true, widthDp = 320)
+@Preview(
+    showBackground = true,
+    widthDp = 320,
+    heightDp = 640
+)
 @Composable
 fun GreetingPreview() {
     BasicsCodelabTheme {
@@ -195,7 +201,11 @@ fun GreetingPreview() {
 }
 
 
-@Preview
+@Preview(
+    showBackground = true,
+    widthDp = 320,
+    heightDp = 640
+)
 @Composable
 fun MyAppPreview() {
     BasicsCodelabTheme {

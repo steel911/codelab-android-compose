@@ -1,0 +1,33 @@
+apply plugin: "com.diffplug.spotless"
+
+spotless {
+    def BUILD_DIR = rootProject.layout.buildDirectory
+    def ROOT_DIR = rootProject.layout.projectDirectory
+
+    java {
+        licenseHeaderFile rootProject.file('spotless/copyright.kt')
+
+        target "**/*.java"
+        targetExclude("$BUILD_DIR/**/*.java")
+        targetExclude('bin/**/*.java')
+
+        googleJavaFormat().aosp()
+        removeUnusedImports()
+        trimTrailingWhitespace()
+        indentWithSpaces()
+        endWithNewline()
+    }
+
+    kotlin {
+        licenseHeaderFile rootProject.file('spotless/copyright.kt')
+
+        target "**/*.kt"
+        targetExclude("$BUILD_DIR/**/*.kt")
+        targetExclude('bin/**/*.kt')
+
+        ktlint("1.2.1").setEditorConfigPath("$ROOT_DIR/.editorconfig")
+        trimTrailingWhitespace()
+        indentWithSpaces()
+        endWithNewline()
+    }
+}
